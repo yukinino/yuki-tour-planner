@@ -1,6 +1,5 @@
 import { createSignal, createEffect, For, onMount } from 'solid-js'
 import { marked } from 'marked'
-import './App.css'
 
 // Import markdown files as raw text
 const restaurantModules = import.meta.glob('./restaurants/*.md', { 
@@ -144,17 +143,17 @@ function App() {
   }
 
   return (
-    <div class="app">
-      <header class="app-header">
-        <div class="header-content">
-          <h1>Yuki Tour Planner</h1>
-          <p class="subtitle">Plan your restaurant tour in Japan</p>
+    <div class="w-full max-w-[700px] p-8 max-sm:p-4">
+      <header class="flex justify-between items-start mb-8 max-sm:mb-4">
+        <div>
+          <h1 class="m-0 mb-1 text-[2rem] max-sm:text-2xl">Yuki Tour Planner</h1>
+          <p class="text-text-secondary m-0">Plan your restaurant tour in Japan</p>
         </div>
-        <div class="header-actions">
+        <div class="flex gap-2">
           {selectedList().length > 0 && (
             <button 
               type="button" 
-              class="share-btn"
+              class="bg-bg-tertiary border border-border text-text-primary rounded-lg px-3 py-2 text-base font-medium cursor-pointer transition-colors duration-200 hover:border-accent"
               onClick={shareLink}
               aria-label="Copy share link"
             >
@@ -163,19 +162,20 @@ function App() {
           )}
           <button 
             type="button" 
-            class="theme-toggle"
+            class="bg-bg-tertiary border border-border text-text-primary rounded-lg px-3 py-2 text-xl cursor-pointer transition-colors duration-200 hover:border-accent"
             onClick={toggleTheme}
             aria-label={`Switch to ${theme() === 'dark' ? 'light' : 'dark'} mode`}
           >
-            {theme() === 'dark' ? '☀️' : '🌙'}
+            {theme() === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19'}
           </button>
         </div>
       </header>
 
-      <div class="add-section">
-        <label for="restaurant-select">Add a restaurant:</label>
+      <div class="mb-8 max-sm:mb-4">
+        <label for="restaurant-select" class="block mb-2 font-medium">Add a restaurant:</label>
         <select 
           id="restaurant-select"
+          class="w-full p-3 text-base rounded-lg border border-border bg-bg-primary text-text-primary cursor-pointer hover:border-accent"
           onChange={(e) => {
             const value = e.currentTarget.value
             if (value) {
@@ -193,52 +193,52 @@ function App() {
         </select>
       </div>
 
-      <div class="list-section">
-        <h2>Your Tour ({selectedList().length} stops)</h2>
+      <div>
+        <h2 class="mb-4">Your Tour ({selectedList().length} stops)</h2>
         
         {selectedList().length === 0 ? (
-          <p class="empty-message">No restaurants added yet. Select one from the dropdown above.</p>
+          <p class="text-text-secondary italic">No restaurants added yet. Select one from the dropdown above.</p>
         ) : (
-          <ul class="restaurant-list">
+          <ul class="list-none p-0 m-0">
             <For each={selectedList()}>
               {(restaurant, index) => (
-                <li class="restaurant-item">
-                  <div class="restaurant-header">
-                    <span class="position">{index() + 1}.</span>
-                    <span class="restaurant-title">{restaurant.title}</span>
-                    <div class="header-buttons">
-                      <div class="move-buttons">
+                <li class="bg-bg-tertiary border border-border rounded-lg mb-3 max-sm:mb-2 transition-[transform,box-shadow] duration-150 ease-in-out hover:border-accent">
+                  <div class="flex items-center px-4 py-3 gap-3 max-sm:px-3 max-sm:py-2 max-sm:gap-2">
+                    <span class="font-semibold text-accent min-w-6">{index() + 1}.</span>
+                    <span class="flex-1 text-base font-medium max-sm:text-sm">{restaurant.title}</span>
+                    <div class="flex items-center gap-2">
+                      <div class="flex flex-row gap-1">
                         <button
                           type="button"
-                          class="move-btn move-up"
+                          class="bg-bg-secondary border border-border rounded px-2.5 py-1 text-[0.8rem] cursor-pointer text-text-primary leading-none transition-[border-color,opacity] duration-200 hover:not-disabled:border-accent hover:not-disabled:bg-bg-tertiary disabled:opacity-30 disabled:cursor-not-allowed max-sm:px-3 max-sm:py-1.5"
                           onClick={() => moveUp(index())}
                           disabled={index() === 0}
                           aria-label={`Move ${restaurant.title} up`}
                         >
-                          ▲
+                          &#9650;
                         </button>
                         <button
                           type="button"
-                          class="move-btn move-down"
+                          class="bg-bg-secondary border border-border rounded px-2.5 py-1 text-[0.8rem] cursor-pointer text-text-primary leading-none transition-[border-color,opacity] duration-200 hover:not-disabled:border-accent hover:not-disabled:bg-bg-tertiary disabled:opacity-30 disabled:cursor-not-allowed max-sm:px-3 max-sm:py-1.5"
                           onClick={() => moveDown(index())}
                           disabled={index() === selectedList().length - 1}
                           aria-label={`Move ${restaurant.title} down`}
                         >
-                          ▼
+                          &#9660;
                         </button>
                       </div>
                       <button
                         type="button"
-                        class="remove-btn"
+                        class="bg-transparent border-none text-danger text-2xl max-sm:text-xl cursor-pointer px-2 max-sm:px-1 leading-none opacity-70 transition-opacity duration-150 hover:opacity-100"
                         onClick={() => removeRestaurant(restaurant.id)}
                         aria-label={`Remove ${restaurant.title}`}
                       >
-                        ×
+                        &times;
                       </button>
                     </div>
                   </div>
                   <div 
-                    class="restaurant-content"
+                    class="restaurant-content px-4 pb-3 max-sm:px-3 max-sm:pb-2 border-t border-border"
                     innerHTML={restaurant.html}
                   />
                 </li>
