@@ -56,7 +56,6 @@ function setIdsInUrl(ids: string[]) {
 function App() {
   const allRestaurants = parseRestaurants()
   const [selectedList, setSelectedList] = createSignal<Restaurant[]>([])
-  const [draggedIndex, setDraggedIndex] = createSignal<number | null>(null)
   const [theme, setTheme] = createSignal<Theme>('dark')
 
   // Load from URL on mount
@@ -114,24 +113,21 @@ function App() {
     setSelectedList(selectedList().filter(r => r.id !== id))
   }
 
-  const handleDragStart = (index: number) => {
-    setDraggedIndex(index)
-  }
-
-  const handleDragOver = (e: DragEvent, index: number) => {
-    e.preventDefault()
-    const dragged = draggedIndex()
-    if (dragged === null || dragged === index) return
-
+  const moveUp = (index: number) => {
+    if (index <= 0) return
     const newList = [...selectedList()]
-    const [removed] = newList.splice(dragged, 1)
-    newList.splice(index, 0, removed)
+    const [removed] = newList.splice(index, 1)
+    newList.splice(index - 1, 0, removed)
     setSelectedList(newList)
-    setDraggedIndex(index)
   }
 
-  const handleDragEnd = () => {
-    setDraggedIndex(null)
+  const moveDown = (index: number) => {
+    const list = selectedList()
+    if (index >= list.length - 1) return
+    const newList = [...list]
+    const [removed] = newList.splice(index, 1)
+    newList.splice(index + 1, 0, removed)
+    setSelectedList(newList)
   }
 
   const shareLink = async () => {
@@ -206,25 +202,40 @@ function App() {
           <ul class="restaurant-list">
             <For each={selectedList()}>
               {(restaurant, index) => (
-                <li
-                  class={`restaurant-item ${draggedIndex() === index() ? 'dragging' : ''}`}
-                  draggable={true}
-                  onDragStart={() => handleDragStart(index())}
-                  onDragOver={(e) => handleDragOver(e, index())}
-                  onDragEnd={handleDragEnd}
-                >
+                <li class="restaurant-item">
                   <div class="restaurant-header">
-                    <span class="drag-handle">☰</span>
                     <span class="position">{index() + 1}.</span>
                     <span class="restaurant-title">{restaurant.title}</span>
-                    <button 
-                      type="button"
-                      class="remove-btn"
-                      onClick={() => removeRestaurant(restaurant.id)}
-                      aria-label={`Remove ${restaurant.title}`}
-                    >
-                      ×
-                    </button>
+                    <div class="header-buttons">
+                      <div class="move-buttons">
+                        <button
+                          type="button"
+                          class="move-btn move-up"
+                          onClick={() => moveUp(index())}
+                          disabled={index() === 0}
+                          aria-label={`Move ${restaurant.title} up`}
+                        >
+                          ▲
+                        </button>
+                        <button
+                          type="button"
+                          class="move-btn move-down"
+                          onClick={() => moveDown(index())}
+                          disabled={index() === selectedList().length - 1}
+                          aria-label={`Move ${restaurant.title} down`}
+                        >
+                          ▼
+                        </button>
+                      </div>
+                      <button
+                        type="button"
+                        class="remove-btn"
+                        onClick={() => removeRestaurant(restaurant.id)}
+                        aria-label={`Remove ${restaurant.title}`}
+                      >
+                        ×
+                      </button>
+                    </div>
                   </div>
                   <div 
                     class="restaurant-content"
