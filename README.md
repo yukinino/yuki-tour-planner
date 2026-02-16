@@ -1,28 +1,55 @@
-## Usage
+# Yuki Tour Planner
+
+A web app for planning restaurant tours in Japan. Browse a curated list of restaurants, build a tour itinerary, reorder stops, and share the tour via URL.
+
+## Features
+
+- **Restaurant catalog** -- restaurant data stored as Markdown files, automatically discovered at build time
+- **Tour builder** -- add restaurants from a dropdown, reorder with up/down arrows, remove with one click
+- **Shareable URLs** -- tour state is persisted in the URL query parameter (`?tour=id1,id2,id3`), so tours can be shared by copying the link
+- **Share button** -- uses the Web Share API where available, falls back to clipboard
+- **Dark/light theme** -- toggle between themes, preference saved to `localStorage` and respects system preference on first visit
+- **Responsive design** -- mobile-friendly layout using Tailwind CSS
+
+## Tech Stack
+
+- [SolidJS](https://solidjs.com) -- reactive UI framework
+- [TypeScript](https://www.typescriptlang.org)
+- [Vite](https://vite.dev) -- build tool and dev server
+- [Tailwind CSS](https://tailwindcss.com) -- utility-first styling
+- [marked](https://marked.js.org) -- Markdown parsing
+
+## Getting Started
 
 ```bash
-$ npm install # or pnpm install or yarn install
+pnpm install
+pnpm dev
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+The dev server runs at [http://localhost:5173](http://localhost:5173).
 
-## Available Scripts
+## Scripts
 
-In the project directory, you can run:
+| Script | Description |
+|---|---|
+| `pnpm dev` | Start the development server |
+| `pnpm build` | Type-check and build for production (output in `dist/`) |
+| `pnpm preview` | Preview the production build locally |
 
-### `npm run dev`
+## Adding a Restaurant
 
-Runs the app in the development mode.<br>
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+Create a new `.md` file in `src/restaurants/` with a heading and a list of recommended dishes:
 
-### `npm run build`
+```markdown
+# Restaurant Name
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+- Dish one
+- Dish two
+- Dish three
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+It will be automatically picked up by the app -- no other changes needed.
 
 ## Deployment
 
-Learn more about deploying your application with the [documentations](https://vite.dev/guide/static-deploy.html)
+See the [Vite static deploy guide](https://vite.dev/guide/static-deploy.html) for deployment options.
