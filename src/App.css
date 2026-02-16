@@ -1,27 +1,233 @@
+:root {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #242424;
+  --bg-tertiary: #2a2a2a;
+  --text-primary: rgba(255, 255, 255, 0.87);
+  --text-secondary: #888;
+  --border-color: #444;
+  --accent-color: #646cff;
+  --accent-hover: #535bf2;
+  --danger-color: #ff6b6b;
+}
+
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #ebebeb;
+  --text-primary: #213547;
+  --text-secondary: #666;
+  --border-color: #ddd;
+  --accent-color: #646cff;
+  --accent-hover: #747bff;
+  --danger-color: #dc3545;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 700px;
   padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.solid:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
 }
 
-.card {
-  padding: 2em;
+.header-content h1 {
+  margin: 0 0 0.25rem 0;
+  font-size: 2rem;
 }
 
-.read-the-docs {
-  color: #888;
+.subtitle {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.theme-toggle,
+.share-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  color: var(--text-primary);
+}
+
+.theme-toggle {
+  font-size: 1.25rem;
+}
+
+.theme-toggle:hover,
+.share-btn:hover {
+  border-color: var(--accent-color);
+}
+
+.share-btn {
+  font-weight: 500;
+}
+
+.add-section {
+  margin-bottom: 2rem;
+}
+
+.add-section label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.add-section select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.add-section select:hover {
+  border-color: var(--accent-color);
+}
+
+.list-section h2 {
+  margin-bottom: 1rem;
+}
+
+.empty-message {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.restaurant-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.restaurant-item {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.restaurant-item:hover {
+  border-color: var(--accent-color);
+}
+
+.restaurant-item.dragging {
+  opacity: 0.5;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.restaurant-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.75rem;
+}
+
+.drag-handle {
+  cursor: grab;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.position {
+  font-weight: 600;
+  color: var(--accent-color);
+  min-width: 1.5rem;
+}
+
+.restaurant-title {
+  flex: 1;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.remove-btn {
+  background: transparent;
+  border: none;
+  color: var(--danger-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.remove-btn:hover {
+  opacity: 1;
+}
+
+.restaurant-content {
+  padding: 0 1rem 1rem 3.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.restaurant-content h1 {
+  display: none;
+}
+
+.restaurant-content h2 {
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.restaurant-content ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.restaurant-content li {
+  margin-bottom: 0.25rem;
+}
+
+.restaurant-content p {
+  margin: 0.5rem 0;
 }
