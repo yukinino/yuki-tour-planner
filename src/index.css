@@ -10,32 +10,38 @@
   --color-accent: var(--accent-color);
   --color-accent-hover: var(--accent-hover);
   --color-danger: var(--danger-color);
+  --color-accent-soft: var(--accent-soft);
+  --color-card-glow: var(--card-glow);
 }
 
-/* Dark theme (default) */
+/* Dark theme (default) -- cozy night pastel */
 :root {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #242424;
-  --bg-tertiary: #2a2a2a;
-  --text-primary: rgba(255, 255, 255, 0.87);
-  --text-secondary: #888;
-  --border-color: #444;
-  --accent-color: #646cff;
-  --accent-hover: #535bf2;
-  --danger-color: #ff6b6b;
+  --bg-primary: #2a2035;
+  --bg-secondary: #1e1726;
+  --bg-tertiary: #332842;
+  --text-primary: #f0e6f6;
+  --text-secondary: #b8a9c8;
+  --border-color: #4a3a5c;
+  --accent-color: #e8a0bf;
+  --accent-hover: #f0b8d0;
+  --accent-soft: rgba(232, 160, 191, 0.12);
+  --danger-color: #f0a0a0;
+  --card-glow: rgba(232, 160, 191, 0.08);
 }
 
-/* Light theme */
+/* Light theme -- soft pastel daytime */
 [data-theme="light"] {
   --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f5;
-  --bg-tertiary: #ebebeb;
-  --text-primary: #213547;
-  --text-secondary: #666;
-  --border-color: #ddd;
-  --accent-color: #646cff;
-  --accent-hover: #747bff;
-  --danger-color: #dc3545;
+  --bg-secondary: #fef5f8;
+  --bg-tertiary: #fff0f5;
+  --text-primary: #5a3e5c;
+  --text-secondary: #9a7b9e;
+  --border-color: #f0d4e0;
+  --accent-color: #e07aab;
+  --accent-hover: #d4608f;
+  --accent-soft: rgba(224, 122, 171, 0.1);
+  --danger-color: #e87070;
+  --card-glow: rgba(224, 122, 171, 0.06);
 }
 
 body {
@@ -45,8 +51,8 @@ body {
   justify-content: center;
   background-color: var(--bg-secondary);
   color: var(--text-primary);
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,9 +65,10 @@ body {
 }
 
 a {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--accent-color);
-  text-decoration: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
@@ -74,20 +81,34 @@ a:hover {
 }
 
 .restaurant-content h2 {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   margin-top: 0.75rem;
   margin-bottom: 0.4rem;
-  color: var(--text-secondary);
+  color: var(--accent-color);
 }
 
 .restaurant-content ul {
   margin: 0;
-  padding-left: 1.25rem;
-  list-style: circle;
+  padding-left: 0;
+  list-style: none;
 }
 
 .restaurant-content li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
+  padding-left: 1.2rem;
+  position: relative;
+  font-weight: 500;
+}
+
+.restaurant-content li::before {
+  content: "\2727";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-size: 0.75rem;
 }
 
 .restaurant-content p {
@@ -96,7 +117,7 @@ a:hover {
 
 @media (max-width: 640px) {
   .restaurant-content h2 {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     margin-top: 0.5rem;
     margin-bottom: 0.25rem;
   }
@@ -104,10 +125,10 @@ a:hover {
   .restaurant-content p,
   .restaurant-content li {
     font-size: 0.85rem;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.15rem;
   }
 
   .restaurant-content ul {
-    padding-left: 1rem;
+    padding-left: 0;
   }
 }

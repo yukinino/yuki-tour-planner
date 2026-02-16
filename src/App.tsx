@@ -144,16 +144,18 @@ function App() {
 
   return (
     <div class="w-full max-w-[700px] p-8 max-sm:p-4">
-      <header class="flex justify-between items-start mb-8 max-sm:mb-4">
+      <header class="flex justify-between items-start mb-8 max-sm:mb-5">
         <div>
-          <h1 class="m-0 mb-1 text-[2rem] max-sm:text-2xl">Yuki Tour Planner</h1>
-          <p class="text-text-secondary m-0">Plan your restaurant tour in Japan</p>
+          <h1 class="m-0 mb-1 text-[2rem] max-sm:text-2xl font-extrabold tracking-tight">
+            Yuki Tour Planner
+          </h1>
+          <p class="text-text-secondary m-0 text-sm font-medium">Plan your restaurant tour in Japan</p>
         </div>
         <div class="flex gap-2">
           {selectedList().length > 0 && (
             <button 
               type="button" 
-              class="bg-bg-tertiary border border-border text-text-primary rounded-lg px-3 py-2 text-base font-medium cursor-pointer transition-colors duration-200 hover:border-accent"
+              class="bg-accent-soft border-2 border-accent text-accent rounded-full px-4 py-2 text-sm font-bold cursor-pointer transition-all duration-200 hover:bg-accent hover:text-bg-primary hover:shadow-[0_4px_14px_var(--card-glow)] hover:scale-105 active:scale-95"
               onClick={shareLink}
               aria-label="Copy share link"
             >
@@ -162,7 +164,7 @@ function App() {
           )}
           <button 
             type="button" 
-            class="bg-bg-tertiary border border-border text-text-primary rounded-lg px-3 py-2 text-xl cursor-pointer transition-colors duration-200 hover:border-accent"
+            class="bg-accent-soft border-2 border-border text-text-primary rounded-full w-10 h-10 text-lg cursor-pointer transition-all duration-200 hover:border-accent hover:shadow-[0_4px_14px_var(--card-glow)] hover:scale-110 active:scale-95 flex items-center justify-center"
             onClick={toggleTheme}
             aria-label={`Switch to ${theme() === 'dark' ? 'light' : 'dark'} mode`}
           >
@@ -171,11 +173,11 @@ function App() {
         </div>
       </header>
 
-      <div class="mb-8 max-sm:mb-4">
-        <label for="restaurant-select" class="block mb-2 font-medium">Add a restaurant:</label>
+      <div class="mb-8 max-sm:mb-5">
+        <label for="restaurant-select" class="block mb-2 font-bold text-sm text-text-secondary tracking-wide uppercase">Add a restaurant</label>
         <select 
           id="restaurant-select"
-          class="w-full p-3 text-base rounded-lg border border-border bg-bg-primary text-text-primary cursor-pointer hover:border-accent"
+          class="w-full p-3.5 text-base rounded-2xl border-2 border-border bg-bg-primary text-text-primary cursor-pointer transition-all duration-200 hover:border-accent focus:border-accent focus:outline-none focus:shadow-[0_0_0_3px_var(--accent-soft)] font-medium"
           onChange={(e) => {
             const value = e.currentTarget.value
             if (value) {
@@ -194,23 +196,27 @@ function App() {
       </div>
 
       <div>
-        <h2 class="mb-4">Your Tour ({selectedList().length} stops)</h2>
+        <h2 class="mb-4 font-bold text-lg">Your Tour <span class="text-accent font-extrabold">({selectedList().length} stops)</span></h2>
         
         {selectedList().length === 0 ? (
-          <p class="text-text-secondary italic">No restaurants added yet. Select one from the dropdown above.</p>
+          <div class="text-text-secondary text-center py-10 max-sm:py-6">
+            <p class="text-3xl mb-2">( ' - ' )</p>
+            <p class="font-medium">No restaurants added yet.</p>
+            <p class="text-sm">Select one from the dropdown above!</p>
+          </div>
         ) : (
           <ul class="list-none p-0 m-0">
             <For each={selectedList()}>
               {(restaurant, index) => (
-                <li class="bg-bg-tertiary border border-border rounded-lg mb-3 max-sm:mb-2 transition-[transform,box-shadow] duration-150 ease-in-out hover:border-accent">
-                  <div class="flex items-center px-4 py-3 gap-3 max-sm:px-3 max-sm:py-2 max-sm:gap-2">
-                    <span class="font-semibold text-accent min-w-6">{index() + 1}.</span>
-                    <span class="flex-1 text-base font-medium max-sm:text-sm">{restaurant.title}</span>
-                    <div class="flex items-center gap-2">
+                <li class="bg-bg-tertiary border-2 border-border rounded-2xl mb-4 max-sm:mb-3 transition-all duration-200 ease-in-out hover:border-accent hover:shadow-[0_6px_24px_var(--card-glow)] hover:-translate-y-0.5">
+                  <div class="flex items-center px-4 py-3 gap-3 max-sm:px-3 max-sm:py-2.5 max-sm:gap-2">
+                    <span class="font-extrabold text-accent min-w-7 text-lg">{index() + 1}.</span>
+                    <span class="flex-1 text-base font-bold max-sm:text-sm">{restaurant.title}</span>
+                    <div class="flex items-center gap-1.5">
                       <div class="flex flex-row gap-1">
                         <button
                           type="button"
-                          class="bg-bg-secondary border border-border rounded px-2.5 py-1 text-[0.8rem] cursor-pointer text-text-primary leading-none transition-[border-color,opacity] duration-200 hover:not-disabled:border-accent hover:not-disabled:bg-bg-tertiary disabled:opacity-30 disabled:cursor-not-allowed max-sm:px-3 max-sm:py-1.5"
+                          class="bg-bg-secondary border-2 border-border rounded-xl px-2.5 py-1.5 text-[0.75rem] cursor-pointer text-text-primary leading-none transition-all duration-200 hover:not-disabled:border-accent hover:not-disabled:bg-accent-soft hover:not-disabled:scale-110 disabled:opacity-25 disabled:cursor-not-allowed max-sm:px-3 max-sm:py-2 active:not-disabled:scale-95"
                           onClick={() => moveUp(index())}
                           disabled={index() === 0}
                           aria-label={`Move ${restaurant.title} up`}
@@ -219,7 +225,7 @@ function App() {
                         </button>
                         <button
                           type="button"
-                          class="bg-bg-secondary border border-border rounded px-2.5 py-1 text-[0.8rem] cursor-pointer text-text-primary leading-none transition-[border-color,opacity] duration-200 hover:not-disabled:border-accent hover:not-disabled:bg-bg-tertiary disabled:opacity-30 disabled:cursor-not-allowed max-sm:px-3 max-sm:py-1.5"
+                          class="bg-bg-secondary border-2 border-border rounded-xl px-2.5 py-1.5 text-[0.75rem] cursor-pointer text-text-primary leading-none transition-all duration-200 hover:not-disabled:border-accent hover:not-disabled:bg-accent-soft hover:not-disabled:scale-110 disabled:opacity-25 disabled:cursor-not-allowed max-sm:px-3 max-sm:py-2 active:not-disabled:scale-95"
                           onClick={() => moveDown(index())}
                           disabled={index() === selectedList().length - 1}
                           aria-label={`Move ${restaurant.title} down`}
@@ -229,7 +235,7 @@ function App() {
                       </div>
                       <button
                         type="button"
-                        class="bg-transparent border-none text-danger text-2xl max-sm:text-xl cursor-pointer px-2 max-sm:px-1 leading-none opacity-70 transition-opacity duration-150 hover:opacity-100"
+                        class="bg-transparent border-none text-danger text-xl max-sm:text-lg cursor-pointer px-1.5 leading-none opacity-60 transition-all duration-150 hover:opacity-100 hover:scale-125 active:scale-90"
                         onClick={() => removeRestaurant(restaurant.id)}
                         aria-label={`Remove ${restaurant.title}`}
                       >
@@ -238,7 +244,7 @@ function App() {
                     </div>
                   </div>
                   <div 
-                    class="restaurant-content px-4 pb-3 max-sm:px-3 max-sm:pb-2 border-t border-border"
+                    class="restaurant-content px-4 pb-3 max-sm:px-3 max-sm:pb-2 border-t-2 border-border"
                     innerHTML={restaurant.html}
                   />
                 </li>
