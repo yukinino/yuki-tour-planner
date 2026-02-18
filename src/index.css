@@ -76,59 +76,44 @@ a:hover {
 }
 
 /* Styles for markdown-rendered content (innerHTML, can't use utility classes) */
-.restaurant-content h1 {
-  display: none;
-}
-
-.restaurant-content h2 {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  margin-top: 0.75rem;
-  margin-bottom: 0.4rem;
-  color: var(--accent-color);
-}
-
-.restaurant-content ul {
-  margin: 0;
-  padding-left: 0;
-  list-style: none;
-}
-
-.restaurant-content li {
-  margin-bottom: 0.35rem;
-  padding-left: 1.2rem;
-  position: relative;
-  font-weight: 500;
-}
-
-.restaurant-content li::before {
-  content: "\2727";
-  position: absolute;
-  left: 0;
-  color: var(--accent-color);
-  font-size: 0.75rem;
-}
-
-.restaurant-content p {
-  margin: 0.5rem 0;
-}
-
-@media (max-width: 640px) {
-  .restaurant-content h2 {
-    font-size: 0.8rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.25rem;
+.restaurant-content {
+  & h1 {
+    @apply hidden;
   }
 
-  .restaurant-content p,
-  .restaurant-content li {
-    font-size: 0.85rem;
-    margin-bottom: 0.15rem;
+  & h2 {
+    @apply text-sm font-bold tracking-wide uppercase mt-3 mb-1.5 text-accent;
   }
 
-  .restaurant-content ul {
-    padding-left: 0;
+  & ul {
+    @apply m-0 pl-0 list-none;
+  }
+
+  & li {
+    @apply mb-1 pl-4 relative font-medium;
+
+    &::before {
+      content: "\2727";
+      @apply absolute left-0 top-1/2 -translate-y-1/2 text-accent text-xs leading-none;
+    }
+  }
+
+  & p {
+    @apply my-2 mx-0;
+  }
+
+  @media (max-width: 640px) {
+    & h2 {
+      @apply text-xs mt-2 mb-1;
+    }
+
+    & p,
+    & li {
+      @apply text-sm mb-0.5;
+    }
+
+    & ul {
+      @apply pl-0;
+    }
   }
 }
