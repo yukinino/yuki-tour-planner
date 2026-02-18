@@ -158,7 +158,7 @@ function App() {
 							}
 						}}
 					>
-						<option value="">Select a restaurant...</option>
+						<option value="">Restaurants</option>
 						<For each={availableRestaurants()}>
 							{(restaurant) => (
 								<option value={restaurant.id}>{restaurant.title}</option>
@@ -241,7 +241,7 @@ function App() {
 										</div>
 									</div>
 									<div
-										class="restaurant-content px-4 pb-3 max-sm:px-3 max-sm:pb-2 border-t-2 border-border"
+										class="restaurant-content px-4 py-3 max-sm:px-3 max-sm:py-2 border-t-2 border-border"
 										innerHTML={restaurant.html}
 									/>
 								</li>
