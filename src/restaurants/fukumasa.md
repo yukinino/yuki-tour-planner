@@ -1,6 +1,6 @@
 # Fukumasa
 
-- Shogayaki (Ginger Pork)
-- Saba (Grilled Macarel)
-- Daikon Oden
-- Niku-Dofu
+- Shogayaki (pork simmered with ginger and onion)
+- Saba (grilled Macarel)
+- Daikon Oden (giant radish slow simmered)
+- Niku-Dofu (stewed beef tofu with soy source and suger)
