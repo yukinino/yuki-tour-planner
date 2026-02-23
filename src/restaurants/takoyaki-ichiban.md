@@ -1,3 +1,3 @@
 # Takoyaki Ichiban
 
-- Takoyaki (Octopus Balls)
+- Takoyaki (Octopus balls with Osaka sauce)
