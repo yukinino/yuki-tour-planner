@@ -1,0 +1,4 @@
+- Nikujaga (pork stewed with potatoes, carrot and onion)
+- Okra with dashi
+- Gobo Kinpira (simmered carrot & burdock root)
+- Yuzu Kosho Renkon (lotus root with spicy citrus)
