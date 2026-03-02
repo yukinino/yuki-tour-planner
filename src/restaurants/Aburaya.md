@@ -1,1 +1,1 @@
-- Kasu Udon (topped with tempura drops)
+- Kasu Udon (topped with tempura flakes)
