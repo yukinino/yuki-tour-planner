@@ -1,3 +1,5 @@
+# Dote Chin
+
 - Nikujaga (pork stewed with potatoes, carrot and onion)
 - Okra with dashi
 - Gobo Kinpira (simmered carrot & burdock root)
